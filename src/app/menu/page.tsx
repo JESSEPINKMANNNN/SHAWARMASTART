@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { useAppContext } from "@/context/AppContext";
 
 const MENU_CATEGORIES = ["All", "Signature Wraps", "Hearty Platters", "Sides & Bites", "Refreshing Drinks"];
 
@@ -21,6 +22,7 @@ const MENU_ITEMS = [
 
 export default function MenuPage() {
     const [activeCategory, setActiveCategory] = useState("All");
+    const { addToCart } = useAppContext();
 
     const filteredItems = MENU_ITEMS.filter(item =>
         activeCategory === "All" ? true : item.category === activeCategory
@@ -64,7 +66,12 @@ export default function MenuPage() {
                                         <span className="font-heading font-extrabold text-primary text-lg whitespace-nowrap pt-0.5">Rs. {item.price}</span>
                                     </div>
                                     <p className="text-muted-foreground text-sm mb-6 flex-1 line-clamp-3">{item.description}</p>
-                                    <Button className="w-full font-bold h-11 rounded-xl shadow-sm">Customize & Add</Button>
+                                    <Button 
+                                        className="w-full font-bold h-11 rounded-xl shadow-sm"
+                                        onClick={() => addToCart({ id: item.id, name: item.name, price: item.price, quantity: 1, image: item.image })}
+                                    >
+                                        Add to Cart
+                                    </Button>
                                 </div>
                             </div>
                         ))}

@@ -36,11 +36,15 @@ export default function Home() {
               Authentic, bold, and unapologetically delicious. Order the best shawarma in town, delivered piping hot to your door.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 rounded-full shadow-[0_0_40px_-10px_rgba(192,57,43,0.8)]">
-                Order Delivery <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 rounded-full shadow-[0_0_40px_-10px_rgba(192,57,43,0.8)] p-0">
+                <Link href="/signup" className="w-full h-full flex items-center justify-center px-8">
+                  Order Delivery <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 px-8 rounded-full bg-white/5 text-white border-white/20 hover:bg-white/10 hover:border-white/30">
-                <Link href="/menu" className="w-full h-full flex items-center justify-center">View Menu</Link>
+              <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 rounded-full bg-white/5 text-white border-white/20 hover:bg-white/10 hover:border-white/30 p-0">
+                <Link href="/menu" className="w-full h-full flex items-center justify-center px-8">
+                  View Menu
+                </Link>
               </Button>
             </div>
           </div>
