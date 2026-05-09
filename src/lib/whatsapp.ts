@@ -1,9 +1,10 @@
 import { CartItem, UserDetails } from "@/context/AppContext";
 
-export function generateWhatsAppLink(user: UserDetails, cart: CartItem[], total: number): string {
+export function generateWhatsAppLink(user: UserDetails, cart: CartItem[], total: number, orderId: string): string {
   const phoneNumber = "923143181261"; // 0314-3181261
   
-  let message = `*New Order!* 🚀\n\n`;
+  let message = `*New Order!* 🚀\n`;
+  message += `*Order ID:* ${orderId}\n\n`;
   
   message += `*Customer Details:*\n`;
   message += `Name: ${user.name}\n`;

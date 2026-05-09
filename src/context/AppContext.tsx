@@ -16,6 +16,15 @@ export type CartItem = {
   image?: string;
 };
 
+export type Order = {
+  id: string;
+  items: CartItem[];
+  total: number;
+  status: 'Preparing' | 'Out for Delivery' | 'Delivered';
+  date: string;
+  estimatedTime: string;
+};
+
 interface AppContextType {
   user: UserDetails | null;
   setUser: (user: UserDetails) => void;
@@ -25,6 +34,8 @@ interface AppContextType {
   updateQuantity: (id: number, quantity: number) => void;
   clearCart: () => void;
   cartTotal: number;
+  currentOrder: Order | null;
+  setOrder: (order: Order) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -32,16 +43,18 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 export function AppProvider({ children }: { children: ReactNode }) {
   const [user, setUserState] = useState<UserDetails | null>(null);
   const [cart, setCartState] = useState<CartItem[]>([]);
+  const [currentOrder, setCurrentOrderState] = useState<Order | null>(null);
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    // Load state from local storage on initial mount
     const storedUser = localStorage.getItem("shawarmastart_user");
     const storedCart = localStorage.getItem("shawarmastart_cart");
+    const storedOrder = localStorage.getItem("shawarmastart_order");
 
     if (storedUser) setUserState(JSON.parse(storedUser));
     if (storedCart) setCartState(JSON.parse(storedCart));
+    if (storedOrder) setCurrentOrderState(JSON.parse(storedOrder));
   }, []);
 
   const setUser = (newUser: UserDetails) => {
@@ -52,6 +65,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const setCart = (newCart: CartItem[]) => {
     setCartState(newCart);
     localStorage.setItem("shawarmastart_cart", JSON.stringify(newCart));
+  };
+
+  const setOrder = (newOrder: Order) => {
+    setCurrentOrderState(newOrder);
+    localStorage.setItem("shawarmastart_order", JSON.stringify(newOrder));
   };
 
   const addToCart = (item: CartItem) => {
@@ -88,7 +106,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
   if (!isMounted) {
-    return null; // or a loading spinner if preferred, to avoid hydration mismatch
+    return null;
   }
 
   return (
@@ -102,6 +120,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         updateQuantity,
         clearCart,
         cartTotal,
+        currentOrder,
+        setOrder,
       }}
     >
       {children}

@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false);
-  const { cart, cartTotal, updateQuantity, removeFromCart, user } = useAppContext();
+  const { cart, cartTotal, updateQuantity, removeFromCart, user, setOrder, clearCart } = useAppContext();
   const router = useRouter();
 
   const handleCheckout = () => {
@@ -20,8 +20,29 @@ export function CartDrawer() {
       return;
     }
     
-    const waLink = generateWhatsAppLink(user, cart, cartTotal);
+    // Generate order ID
+    const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000);
+    
+    // Generate WhatsApp Link
+    const waLink = generateWhatsAppLink(user, cart, cartTotal, orderId);
+    
+    // Save order in context
+    setOrder({
+      id: orderId,
+      items: [...cart],
+      total: cartTotal,
+      status: "Preparing",
+      date: new Date().toISOString(),
+      estimatedTime: "40 minutes"
+    });
+    
+    // Clear the cart
+    clearCart();
+    
+    // Close Drawer, redirect to order status, and open WhatsApp for notification
+    setIsOpen(false);
     window.open(waLink, "_blank");
+    router.push("/order-status");
   };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -43,14 +64,14 @@ export function CartDrawer() {
       {/* Overlay */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[50] transition-opacity"
           onClick={() => setIsOpen(false)}
         />
       )}
 
       {/* Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 w-full max-w-md bg-background shadow-2xl border-l border-border transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md bg-background shadow-2xl border-l border-border transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -148,7 +169,7 @@ export function CartDrawer() {
                 className="w-full h-14 text-lg rounded-xl shadow-lg shadow-primary/20"
                 onClick={handleCheckout}
               >
-                {user ? "Place Order via WhatsApp" : "Enter Details to Checkout"} <ArrowRight className="ml-2 h-5 w-5" />
+                {user ? "Complete Order" : "Enter Details to Checkout"} <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </div>
           )}
