@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ShoppingCart, X, Plus, Minus, ArrowRight } from "lucide-react";
+import { ShoppingCart, X, Plus, Minus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/context/AppContext";
 import { generateWhatsAppLink } from "@/lib/whatsapp";
@@ -23,14 +23,18 @@ export function CartDrawer() {
     // Generate order ID
     const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000);
     
+    const deliveryCharge = 120;
+    const tax = cartTotal * 0.16;
+    const grandTotal = cartTotal + deliveryCharge + tax;
+
     // Generate WhatsApp Link
-    const waLink = generateWhatsAppLink(user, cart, cartTotal, orderId);
+    const waLink = generateWhatsAppLink(user, cart, grandTotal, orderId);
     
     // Save order in context
     setOrder({
       id: orderId,
       items: [...cart],
-      total: cartTotal,
+      total: grandTotal,
       status: "Preparing",
       date: new Date().toISOString(),
       estimatedTime: "40 minutes"
@@ -46,6 +50,11 @@ export function CartDrawer() {
   };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Calculations for UI matching
+  const deliveryCharge = 120;
+  const tax = cartTotal * 0.16;
+  const grandTotal = cartTotal + deliveryCharge + tax;
 
   return (
     <>
@@ -71,110 +80,141 @@ export function CartDrawer() {
 
       {/* Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md bg-[#111111] shadow-2xl border-l border-border transform transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full">
-          {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-border bg-[#1A1A1A]">
-            <h2 className="text-2xl font-heading font-bold flex items-center gap-2 text-white">
-              <ShoppingCart className="h-6 w-6 text-primary" />
-              Your Cart
-            </h2>
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white shadow-sm z-10">
+          <h2 className="text-xl font-bold flex items-center gap-2 text-black">
+            Your Cart
+          </h2>
+          <div className="flex items-center gap-4">
+            {cart.length > 0 && (
+              <button 
+                onClick={clearCart}
+                className="text-[#E31837] font-semibold text-sm hover:underline"
+              >
+                Clear cart
+              </button>
+            )}
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-full transition-colors"
+              className="p-1 text-gray-400 hover:text-black transition-colors"
             >
               <X className="h-6 w-6" />
             </button>
           </div>
+        </div>
 
-          {/* Cart Items */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
-            {cart.length === 0 ? (
-              <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4">
-                <ShoppingCart className="h-16 w-16 opacity-20" />
-                <p className="text-lg font-medium">Your cart is empty</p>
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    setIsOpen(false);
-                    router.push("/menu");
-                  }}
-                  className="bg-transparent border-gray-600 text-white hover:bg-gray-800"
-                >
-                  Browse Menu
-                </Button>
-              </div>
-            ) : (
-              cart.map((item) => (
-                <div key={item.id} className="flex gap-4 p-4 rounded-2xl bg-[#1A1A1A] border border-gray-800">
+        {/* Cart Items Area */}
+        <div className="flex-1 overflow-y-auto bg-[#F9F9F9]">
+          {cart.length === 0 ? (
+            <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4 p-6">
+              <ShoppingCart className="h-16 w-16 opacity-20" />
+              <p className="text-lg font-medium text-black">Your cart is empty</p>
+              <Button 
+                onClick={() => {
+                  setIsOpen(false);
+                  router.push("/menu");
+                }}
+                className="bg-[#E31837] text-white hover:bg-[#c2142e]"
+              >
+                Browse Menu
+              </Button>
+            </div>
+          ) : (
+            <div className="p-4 space-y-4">
+              {cart.map((item) => (
+                <div key={item.id} className="flex gap-4 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
                   {item.image && (
-                    <div className="relative h-20 w-20 rounded-xl overflow-hidden shrink-0">
+                    <div className="relative h-20 w-20 rounded-md overflow-hidden shrink-0 border border-gray-100">
                       <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                   )}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="font-bold text-white text-base leading-tight pr-2 pb-1">{item.name}</h3>
-                      <p className="text-primary font-bold text-sm">Rs. {item.price}</p>
+                      <h3 className="font-bold text-black text-base leading-tight">{item.name}</h3>
                     </div>
-                    <div className="flex items-center justify-between mt-2">
-                      <div className="flex items-center gap-3 bg-[#222222] border border-gray-700 rounded-full px-2 py-1">
+                    
+                    <div className="flex flex-col mt-3">
+                      <div className="text-right w-full">
+                        <p className="text-black font-bold text-base">Rs. {item.price.toFixed(2)}</p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between mt-2">
+                        <div className="flex items-center gap-3">
+                          <button 
+                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                            className="bg-[#E31837] text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-[#c2142e] transition-colors"
+                          >
+                            <Minus className="h-4 w-4" />
+                          </button>
+                          <span className="font-bold text-sm min-w-[20px] text-center text-black border border-gray-200 px-3 py-1 rounded-md bg-white">{item.quantity}</span>
+                          <button 
+                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                            className="bg-[#E31837] text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-[#c2142e] transition-colors"
+                          >
+                            <Plus className="h-4 w-4" />
+                          </button>
+                        </div>
                         <button 
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="text-gray-400 hover:text-white transition-colors"
+                          onClick={() => removeFromCart(item.id)}
+                          className="text-gray-400 hover:text-gray-600 transition-colors"
                         >
-                          <Minus className="h-4 w-4" />
-                        </button>
-                        <span className="font-bold text-sm min-w-[1ch] text-center text-white">{item.quantity}</span>
-                        <button 
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="text-gray-400 hover:text-white transition-colors"
-                        >
-                          <Plus className="h-4 w-4" />
+                          <Trash2 className="h-5 w-5" />
                         </button>
                       </div>
-                      <button 
-                        onClick={() => removeFromCart(item.id)}
-                        className="text-sm text-red-500 hover:text-red-400 font-medium underline underline-offset-2"
-                      >
-                        Remove
-                      </button>
                     </div>
                   </div>
                 </div>
-              ))
-            )}
-          </div>
-
-          {/* Footer / Checkout */}
-          {cart.length > 0 && (
-            <div className="p-6 bg-[#1A1A1A] border-t border-gray-800 space-y-4">
-              <div className="flex justify-between text-lg font-medium text-white">
-                <span>Subtotal</span>
-                <span className="font-bold">Rs. {cartTotal}</span>
-              </div>
-              <div className="flex justify-between text-gray-400 text-sm">
-                <span>Delivery Fee</span>
-                <span>Calculated via WhatsApp</span>
-              </div>
-              <div className="border-t border-gray-800 pt-4 flex justify-between text-xl font-heading font-bold text-white">
-                <span>Total</span>
-                <span className="text-primary">Rs. {cartTotal}</span>
-              </div>
-              
-              <Button 
-                size="lg" 
-                className="w-full h-14 text-lg rounded-xl shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90 text-white"
-                onClick={handleCheckout}
-              >
-                {user ? "Complete Order" : "Enter Details to Checkout"} <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              ))}
             </div>
           )}
         </div>
+
+        {/* Footer / Checkout */}
+        {cart.length > 0 && (
+          <div className="bg-white border-t border-gray-200 pb-safe">
+            {/* Free Delivery Banner */}
+            <div className="bg-[#FFF0F2] text-[#8C1823] text-sm px-4 py-2 mx-4 mt-4 rounded-md border border-[#FADCDF]">
+              Add Rs.2043 more to get free delivery.
+            </div>
+
+            <div className="p-4 space-y-2">
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>Subtotal</span>
+                <span>Rs. {cartTotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-sm text-gray-600">
+                <span>Delivery Charges</span>
+                <span>Rs. {deliveryCharge.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-sm text-gray-600 border-b border-gray-100 pb-2">
+                <span>Tax (16%)</span>
+                <span>Rs. {tax.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between font-bold text-black text-lg pt-1">
+                <span>Grand total <span className="text-xs font-normal text-gray-500">(Incl. Tax)</span></span>
+                <span>Rs. {grandTotal.toFixed(2)}</span>
+              </div>
+              
+              <div className="bg-white text-black border border-[#E31837] text-sm px-4 py-2 rounded-md flex items-center justify-center gap-2 mt-2">
+                <span className="text-[#E31837] font-bold">Great! You saved Rs. 411.00.</span>
+              </div>
+
+              <div className="pt-3">
+                <Button 
+                  size="lg" 
+                  className="w-full h-12 text-lg rounded-md font-bold bg-[#E31837] hover:bg-[#c2142e] text-white"
+                  onClick={handleCheckout}
+                >
+                  Checkout
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
