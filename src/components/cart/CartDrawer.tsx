@@ -117,7 +117,7 @@ export function CartDrawer() {
                   )}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="font-bold text-white line-clamp-1">{item.name}</h3>
+                      <h3 className="font-bold text-white text-base leading-tight pr-2 pb-1">{item.name}</h3>
                       <p className="text-primary font-bold text-sm">Rs. {item.price}</p>
                     </div>
                     <div className="flex items-center justify-between mt-2">
