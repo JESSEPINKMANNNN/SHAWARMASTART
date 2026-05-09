@@ -80,27 +80,27 @@ export function CartDrawer() {
 
       {/* Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col ${
+        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md bg-[#111111] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col border-l border-[#2A2A2A] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white shadow-sm z-10">
-          <h2 className="text-xl font-bold flex items-center gap-2 text-black">
+        <div className="flex items-center justify-between p-4 border-b border-[#2A2A2A] bg-[#1A1A1A] shadow-sm z-10">
+          <h2 className="text-xl font-bold flex items-center gap-2 text-white">
             Your Cart
           </h2>
           <div className="flex items-center gap-4">
             {cart.length > 0 && (
               <button 
                 onClick={clearCart}
-                className="text-[#E31837] font-semibold text-sm hover:underline"
+                className="text-primary font-semibold text-sm hover:underline"
               >
                 Clear cart
               </button>
             )}
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 text-gray-400 hover:text-black transition-colors"
+              className="p-1 text-gray-400 hover:text-white transition-colors"
             >
               <X className="h-6 w-6" />
             </button>
@@ -108,17 +108,17 @@ export function CartDrawer() {
         </div>
 
         {/* Cart Items Area */}
-        <div className="flex-1 overflow-y-auto bg-[#F9F9F9]">
+        <div className="flex-1 overflow-y-auto bg-[#111111]">
           {cart.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4 p-6">
               <ShoppingCart className="h-16 w-16 opacity-20" />
-              <p className="text-lg font-medium text-black">Your cart is empty</p>
+              <p className="text-lg font-medium text-white">Your cart is empty</p>
               <Button 
                 onClick={() => {
                   setIsOpen(false);
                   router.push("/menu");
                 }}
-                className="bg-[#E31837] text-white hover:bg-[#c2142e]"
+                className="bg-primary text-white hover:bg-primary/90"
               >
                 Browse Menu
               </Button>
@@ -126,41 +126,42 @@ export function CartDrawer() {
           ) : (
             <div className="p-4 space-y-4">
               {cart.map((item) => (
-                <div key={item.id} className="flex gap-4 p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+                <div key={item.id} className="flex gap-4 p-4 bg-[#1A1A1A] rounded-lg shadow-sm border border-[#2A2A2A]">
                   {item.image && (
-                    <div className="relative h-20 w-20 rounded-md overflow-hidden shrink-0 border border-gray-100">
+                    <div className="relative h-20 w-20 rounded-md overflow-hidden shrink-0 border border-[#2A2A2A]">
                       <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                   )}
                   <div className="flex-1 flex flex-col justify-between">
                     <div>
-                      <h3 className="font-bold text-black text-base leading-tight">{item.name}</h3>
+                      <h3 className="font-bold text-white text-base leading-tight">{item.name}</h3>
+                      <p className="text-gray-400 text-xs mt-1 line-clamp-2">{item.description || "Fresh and delicious shawarma."}</p>
                     </div>
                     
                     <div className="flex flex-col mt-3">
                       <div className="text-right w-full">
-                        <p className="text-black font-bold text-base">Rs. {item.price.toFixed(2)}</p>
+                        <p className="text-white font-bold text-base">Rs. {item.price.toFixed(2)}</p>
                       </div>
                       
                       <div className="flex items-center justify-between mt-2">
                         <div className="flex items-center gap-3">
                           <button 
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="bg-[#E31837] text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-[#c2142e] transition-colors"
+                            className="bg-primary text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-primary/90 transition-colors"
                           >
                             <Minus className="h-4 w-4" />
                           </button>
-                          <span className="font-bold text-sm min-w-[20px] text-center text-black border border-gray-200 px-3 py-1 rounded-md bg-white">{item.quantity}</span>
+                          <span className="font-bold text-sm min-w-[20px] text-center text-white border border-[#2A2A2A] px-3 py-1 rounded-md bg-[#111111]">{item.quantity}</span>
                           <button 
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="bg-[#E31837] text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-[#c2142e] transition-colors"
+                            className="bg-primary text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-primary/90 transition-colors"
                           >
                             <Plus className="h-4 w-4" />
                           </button>
                         </div>
                         <button 
                           onClick={() => removeFromCart(item.id)}
-                          className="text-gray-400 hover:text-gray-600 transition-colors"
+                          className="text-gray-400 hover:text-primary transition-colors"
                         >
                           <Trash2 className="h-5 w-5" />
                         </button>
@@ -175,38 +176,38 @@ export function CartDrawer() {
 
         {/* Footer / Checkout */}
         {cart.length > 0 && (
-          <div className="bg-white border-t border-gray-200 pb-safe">
+          <div className="bg-[#1A1A1A] border-t border-[#2A2A2A] pb-safe">
             {/* Free Delivery Banner */}
-            <div className="bg-[#FFF0F2] text-[#8C1823] text-sm px-4 py-2 mx-4 mt-4 rounded-md border border-[#FADCDF]">
+            <div className="bg-primary/10 text-primary text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-primary/20">
               Add Rs.2043 more to get free delivery.
             </div>
 
             <div className="p-4 space-y-2">
-              <div className="flex justify-between text-sm text-gray-600">
+              <div className="flex justify-between text-sm text-gray-300">
                 <span>Subtotal</span>
                 <span>Rs. {cartTotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-sm text-gray-600">
+              <div className="flex justify-between text-sm text-gray-300">
                 <span>Delivery Charges</span>
                 <span>Rs. {deliveryCharge.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-sm text-gray-600 border-b border-gray-100 pb-2">
+              <div className="flex justify-between text-sm text-gray-300 border-b border-[#2A2A2A] pb-2">
                 <span>Tax (16%)</span>
                 <span>Rs. {tax.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between font-bold text-black text-lg pt-1">
-                <span>Grand total <span className="text-xs font-normal text-gray-500">(Incl. Tax)</span></span>
+              <div className="flex justify-between font-bold text-white text-lg pt-1">
+                <span>Grand total <span className="text-xs font-normal text-gray-400">(Incl. Tax)</span></span>
                 <span>Rs. {grandTotal.toFixed(2)}</span>
               </div>
               
-              <div className="bg-white text-black border border-[#E31837] text-sm px-4 py-2 rounded-md flex items-center justify-center gap-2 mt-2">
-                <span className="text-[#E31837] font-bold">Great! You saved Rs. 411.00.</span>
+              <div className="bg-[#111111] text-white border border-primary text-sm px-4 py-2 rounded-md flex items-center justify-center gap-2 mt-2">
+                <span className="text-primary font-bold">Great! You saved Rs. 411.00.</span>
               </div>
 
               <div className="pt-3">
                 <Button 
                   size="lg" 
-                  className="w-full h-12 text-lg rounded-md font-bold bg-[#E31837] hover:bg-[#c2142e] text-white"
+                  className="w-full h-12 text-lg rounded-md font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20"
                   onClick={handleCheckout}
                 >
                   Checkout
