@@ -7,17 +7,15 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useAppContext } from "@/context/AppContext";
 
-const MENU_CATEGORIES = ["All", "Signature Wraps", "Hearty Platters", "Sides & Bites", "Refreshing Drinks"];
+const MENU_CATEGORIES = ["All", "Signature Wraps", "Sides & Bites", "Refreshing Drinks"];
 
 const MENU_ITEMS = [
-    { id: 1, name: "The Sultan Wrap", category: "Signature Wraps", price: 850, image: "/images/shawarma_hero.png", description: "Double spiced chicken, our signature garlic toum, crispy fries inside, wrapped in fresh saj bread, and topped with our secret spicy drizzle." },
-    { id: 2, name: "Classic Chicken Shawarma", category: "Signature Wraps", price: 650, image: "/images/shawarma_hero.png", description: "The original. Chicken, pickles, garlic sauce, fries, in classic pita." },
-    { id: 3, name: "Za Culture Platter", category: "Hearty Platters", price: 1450, image: "/images/shawarma_platter.png", description: "A mountain of our legendary chicken, served over spiced rice, with fresh hummus, fattoush salad, and warm pita points." },
-    { id: 4, name: "Sultan's Feast Platter", category: "Hearty Platters", price: 1850, image: "/images/shawarma_platter.png", description: "Sliced wraps served with rice, unlimited fries, and three signature dips." },
-    { id: 5, name: "Dynamite Bites", category: "Sides & Bites", price: 550, image: "/images/dynamite_bites.png", description: "Crispy chicken bites tossed in our fiery house dynamite sauce." },
-    { id: 6, name: "Hummus & Pita", category: "Sides & Bites", price: 450, image: "/images/dynamite_bites.png", description: "Creamy house-made hummus drizzled with olive oil, served with 2 warm pitas." },
-    { id: 7, name: "Garlic Toum Dip", category: "Sides & Bites", price: 150, image: "/images/dynamite_bites.png", description: "Extra side of our famous fluffy garlic sauce." },
-    { id: 8, name: "Mint Margarita", category: "Refreshing Drinks", price: 350, image: "/images/dynamite_bites.png", description: "Fresh mint, lemon juice, blended with ice." },
+    { id: 1, name: "WAQI BADA SHAWARMA", category: "Signature Wraps", price: 850, image: "/images/WAQI_BADA_SHAWARMA.png", description: "Double spiced chicken, our signature garlic toum, crispy fries inside, wrapped in fresh saj bread, and topped with our secret spicy drizzle." },
+    { id: 2, name: "That's A Wrap!", category: "Signature Wraps", price: 650, image: "/images/That's_A_Wrap!.png", description: "The original. Chicken, pickles, garlic sauce, fries, in classic pita." },
+    { id: 3, name: "Dynamic Bites", category: "Sides & Bites", price: 550, image: "/images/Dynamic_Bites.png", description: "Crispy chicken bites tossed in our fiery house dynamite sauce." },
+    { id: 4, name: "Hummus & Pita", category: "Sides & Bites", price: 450, image: "/images/hummus_and_pita.png", description: "Creamy house-made hummus drizzled with olive oil, served with 2 warm pitas." },
+    { id: 5, name: "Garlic Toum Dip", category: "Sides & Bites", price: 150, image: "/images/Garlic_Toum_Dip.png", description: "Extra side of our famous fluffy garlic sauce." },
+    { id: 6, name: "Mint Margarita", category: "Refreshing Drinks", price: 350, image: "/images/Mint_Margarita.png", description: "Fresh mint, lemon juice, blended with ice." },
 ];
 
 export default function MenuPage() {

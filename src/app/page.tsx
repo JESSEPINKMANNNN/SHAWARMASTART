@@ -15,7 +15,7 @@ export default function Home() {
         <section className="relative w-full h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden bg-black">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/images/shawarma_hero.png"
+              src="/images/WAQI_BADA_SHAWARMA.png"
               alt="Sultan Shawarma"
               fill
               className="object-cover object-center brightness-[0.6]"
@@ -54,7 +54,7 @@ export default function Home() {
         <section className="relative py-12 bg-background -mt-8 z-30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap justify-center gap-3 md:gap-4 bg-background p-4 rounded-3xl shadow-xl shadow-black/5 border border-border mx-auto max-w-5xl">
-              {["Signature Wraps", "Hearty Platters", "Sides & Bites", "Refreshing Drinks", "Desserts"].map((cat) => (
+              {["Signature Wraps", "Sides & Bites", "Refreshing Drinks"].map((cat) => (
                 <button key={cat} className="px-5 py-2.5 rounded-full bg-muted text-foreground font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300 active:scale-95 text-sm md:text-base border border-transparent hover:border-primary/20">
                   {cat}
                 </button>
@@ -80,7 +80,7 @@ export default function Home() {
               {/* Item Card 1 */}
               <div className="group bg-background rounded-3xl overflow-hidden shadow-sm border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
                 <div className="h-64 bg-muted w-full relative overflow-hidden">
-                  <Image src="/images/shawarma_hero.png" alt="The Sultan Wrap" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <Image src="/images/WAQI_BADA_SHAWARMA.png" alt="WAQI BADA SHAWARMA" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute top-4 left-4 z-10">
                     <span className="bg-white/90 backdrop-blur text-foreground text-xs font-bold px-3 py-1 rounded-full shadow-sm">
                       Best Seller 👑
@@ -89,7 +89,7 @@ export default function Home() {
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex justify-between items-start mb-3 gap-4">
-                    <h3 className="font-heading font-bold text-xl text-foreground leading-tight group-hover:text-primary transition-colors">The Sultan Wrap</h3>
+                    <h3 className="font-heading font-bold text-xl text-foreground leading-tight group-hover:text-primary transition-colors">WAQI BADA SHAWARMA</h3>
                     <span className="font-heading font-bold text-primary text-xl whitespace-nowrap">Rs. 850</span>
                   </div>
                   <p className="text-muted-foreground text-sm mb-6 flex-1">Double spiced chicken, our signature garlic toum, crispy fries inside, wrapped in fresh saj bread, and topped with our secret spicy drizzle.</p>
@@ -100,14 +100,14 @@ export default function Home() {
               {/* Item Card 2 */}
               <div className="group bg-background rounded-3xl overflow-hidden shadow-sm border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
                 <div className="h-64 bg-muted w-full relative overflow-hidden">
-                  <Image src="/images/shawarma_platter.png" alt="Za Culture Platter" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <Image src="/images/That's_A_Wrap!.png" alt="That's A Wrap!" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex justify-between items-start mb-3 gap-4">
-                    <h3 className="font-heading font-bold text-xl text-foreground leading-tight group-hover:text-primary transition-colors">Za Culture Platter</h3>
-                    <span className="font-heading font-bold text-primary text-xl whitespace-nowrap">Rs. 1,450</span>
+                    <h3 className="font-heading font-bold text-xl text-foreground leading-tight group-hover:text-primary transition-colors">That's A Wrap!</h3>
+                    <span className="font-heading font-bold text-primary text-xl whitespace-nowrap">Rs. 650</span>
                   </div>
-                  <p className="text-muted-foreground text-sm mb-6 flex-1">A mountain of our legendary chicken, served over spiced rice, with fresh hummus, fattoush salad, and warm pita points.</p>
+                  <p className="text-muted-foreground text-sm mb-6 flex-1">The original. Chicken, pickles, garlic sauce, fries, in classic pita.</p>
                   <Button className="w-full font-bold h-12 rounded-xl">Add to Cart</Button>
                 </div>
               </div>
@@ -115,14 +115,14 @@ export default function Home() {
               {/* Item Card 3 */}
               <div className="group bg-background rounded-3xl overflow-hidden shadow-sm border border-border hover:border-primary/30 hover:shadow-xl transition-all duration-300 flex flex-col h-full">
                 <div className="h-64 bg-muted w-full relative overflow-hidden">
-                  <Image src="/images/dynamite_bites.png" alt="Dynamite Bites" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <Image src="/images/Dynamic_Bites.png" alt="Dynamic Bites" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 </div>
                 <div className="p-6 flex flex-col flex-1">
                   <div className="flex justify-between items-start mb-3 gap-4">
-                    <h3 className="font-heading font-bold text-xl text-foreground leading-tight group-hover:text-primary transition-colors">Dynamite Bites</h3>
+                    <h3 className="font-heading font-bold text-xl text-foreground leading-tight group-hover:text-primary transition-colors">Dynamic Bites</h3>
                     <span className="font-heading font-bold text-primary text-xl whitespace-nowrap">Rs. 550</span>
                   </div>
-                  <p className="text-muted-foreground text-sm mb-6 flex-1">Crispy, golden-fried chicken bites tossed in our fiery house dynamite sauce. Perfect for sharing (or not).</p>
+                  <p className="text-muted-foreground text-sm mb-6 flex-1">Crispy chicken bites tossed in our fiery house dynamite sauce.</p>
                   <Button className="w-full font-bold h-12 rounded-xl">Add to Cart</Button>
                 </div>
               </div>
