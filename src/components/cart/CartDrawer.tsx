@@ -24,9 +24,9 @@ export function CartDrawer() {
     const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000);
     
     const tax = cartTotal * 0.16;
-    const totalWithoutDelivery = cartTotal + tax;
-    const deliveryCharge = totalWithoutDelivery >= 2000 ? 0 : 120;
-    const grandTotal = totalWithoutDelivery + deliveryCharge;
+    const grandTotalWithDelivery = cartTotal + tax + 120;
+    const deliveryCharge = grandTotalWithDelivery >= 2000 ? 0 : 120;
+    const grandTotal = cartTotal + tax + deliveryCharge;
 
     // Generate WhatsApp Link
     const waLink = generateWhatsAppLink(user, cart, grandTotal, orderId);
@@ -54,10 +54,10 @@ export function CartDrawer() {
 
   // Calculations for UI matching
   const tax = cartTotal * 0.16;
-  const totalWithoutDelivery = cartTotal + tax;
-  const deliveryCharge = totalWithoutDelivery >= 2000 ? 0 : 120;
-  const grandTotal = totalWithoutDelivery + deliveryCharge;
-  const amountToFreeDelivery = 2000 - totalWithoutDelivery;
+  const grandTotalWithDelivery = cartTotal + tax + 120;
+  const deliveryCharge = grandTotalWithDelivery >= 2000 ? 0 : 120;
+  const grandTotal = cartTotal + tax + deliveryCharge;
+  const amountToFreeDelivery = 2000 - grandTotalWithDelivery;
 
   return (
     <>
