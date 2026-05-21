@@ -129,46 +129,42 @@ export function CartDrawer() {
           ) : (
             <div className="p-4 space-y-4">
               {cart.map((item) => (
-                <div key={item.id} className="flex gap-4 p-4 bg-[#1A1A1A] rounded-lg shadow-sm border border-[#2A2A2A]">
+                <div key={item.id} className="flex gap-4 p-4 bg-[#1e1e1e] rounded-xl shadow-lg border border-[#333333] hover:border-primary/50 transition-colors">
                   {item.image && (
-                    <div className="relative h-20 w-20 rounded-md overflow-hidden shrink-0 border border-[#2A2A2A]">
+                    <div className="relative h-24 w-24 rounded-lg overflow-hidden shrink-0 border border-[#333333] shadow-inner">
                       <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                   )}
-                  <div className="flex-1 flex flex-col justify-between">
-                    <div>
-                      <h3 className="font-bold text-white text-base leading-tight">{item.name}</h3>
-                      <p className="text-gray-400 text-xs mt-1 line-clamp-2">{item.description || "Fresh and delicious shawarma."}</p>
+                  <div className="flex-1 flex flex-col">
+                    <div className="flex justify-between items-start gap-2">
+                      <h3 className="font-extrabold text-white text-lg leading-tight line-clamp-2">{item.name}</h3>
+                      <p className="text-primary font-black text-lg whitespace-nowrap">Rs. {item.price.toFixed(2)}</p>
                     </div>
+                    <p className="text-gray-400 text-xs mt-1 mb-auto line-clamp-2">{item.description || "Fresh and delicious."}</p>
                     
-                    <div className="flex flex-col mt-3">
-                      <div className="text-right w-full">
-                        <p className="text-white font-bold text-base">Rs. {item.price.toFixed(2)}</p>
-                      </div>
-                      
-                      <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center gap-3">
-                          <button 
-                            onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            className="bg-primary text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-primary/90 transition-colors"
-                          >
-                            <Minus className="h-4 w-4" />
-                          </button>
-                          <span className="font-bold text-sm min-w-[20px] text-center text-white border border-[#2A2A2A] px-3 py-1 rounded-md bg-[#111111]">{item.quantity}</span>
-                          <button 
-                            onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            className="bg-primary text-white h-7 w-7 rounded-md flex items-center justify-center hover:bg-primary/90 transition-colors"
-                          >
-                            <Plus className="h-4 w-4" />
-                          </button>
-                        </div>
+                    <div className="flex items-center justify-between mt-4">
+                      <div className="flex items-center gap-3 bg-[#111111] p-1 rounded-lg border border-[#333333]">
                         <button 
-                          onClick={() => removeFromCart(item.id)}
-                          className="text-gray-400 hover:text-primary transition-colors"
+                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                          className="text-white hover:text-primary h-7 w-7 rounded flex items-center justify-center transition-colors"
                         >
-                          <Trash2 className="h-5 w-5" />
+                          <Minus className="h-4 w-4" />
+                        </button>
+                        <span className="font-bold text-sm min-w-[20px] text-center text-white">{item.quantity}</span>
+                        <button 
+                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                          className="text-white hover:text-primary h-7 w-7 rounded flex items-center justify-center transition-colors"
+                        >
+                          <Plus className="h-4 w-4" />
                         </button>
                       </div>
+                      <button 
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-red-500 bg-red-500/10 hover:bg-red-500 hover:text-white transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                        <span className="text-xs uppercase tracking-wider">Remove</span>
+                      </button>
                     </div>
                   </div>
                 </div>
