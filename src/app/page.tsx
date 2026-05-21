@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { AddToCartButton } from "@/components/ui/add-to-cart-button";
 
 export default function Home() {
   return (
@@ -93,7 +94,7 @@ export default function Home() {
                     <span className="font-heading font-bold text-primary text-xl whitespace-nowrap">Rs. 850</span>
                   </div>
                   <p className="text-muted-foreground text-sm mb-6 flex-1">Double spiced chicken, our signature garlic toum, crispy fries inside, wrapped in fresh saj bread, and topped with our secret spicy drizzle.</p>
-                  <Button className="w-full font-bold h-12 rounded-xl">Add to Cart</Button>
+                  <AddToCartButton item={{ id: 1, name: "WAQI BADA SHAWARMA", price: 850, image: "/images/WAQI_BADA_SHAWARMA.png" }} />
                 </div>
               </div>
 
@@ -108,7 +109,7 @@ export default function Home() {
                     <span className="font-heading font-bold text-primary text-xl whitespace-nowrap">Rs. 650</span>
                   </div>
                   <p className="text-muted-foreground text-sm mb-6 flex-1">The original. Chicken, pickles, garlic sauce, fries, in classic pita.</p>
-                  <Button className="w-full font-bold h-12 rounded-xl">Add to Cart</Button>
+                  <AddToCartButton item={{ id: 2, name: "That's A Wrap!", price: 650, image: "/images/That's_A_Wrap!.png" }} />
                 </div>
               </div>
 
@@ -123,7 +124,7 @@ export default function Home() {
                     <span className="font-heading font-bold text-primary text-xl whitespace-nowrap">Rs. 550</span>
                   </div>
                   <p className="text-muted-foreground text-sm mb-6 flex-1">Crispy chicken bites tossed in our fiery house dynamite sauce.</p>
-                  <Button className="w-full font-bold h-12 rounded-xl">Add to Cart</Button>
+                  <AddToCartButton item={{ id: 3, name: "Dynamic Bites", price: 550, image: "/images/Dynamic_Bites.png" }} />
                 </div>
               </div>
             </div>
