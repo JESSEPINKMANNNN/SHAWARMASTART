@@ -23,7 +23,7 @@ export function CartDrawer() {
     // Generate order ID
     const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000);
     
-    const deliveryCharge = 120;
+    const deliveryCharge = cartTotal >= 2000 ? 0 : 120;
     const tax = cartTotal * 0.16;
     const grandTotal = cartTotal + deliveryCharge + tax;
 
@@ -52,9 +52,10 @@ export function CartDrawer() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   // Calculations for UI matching
-  const deliveryCharge = 120;
+  const deliveryCharge = cartTotal >= 2000 ? 0 : 120;
   const tax = cartTotal * 0.16;
   const grandTotal = cartTotal + deliveryCharge + tax;
+  const amountToFreeDelivery = 2000 - cartTotal;
 
   return (
     <>
@@ -178,9 +179,15 @@ export function CartDrawer() {
         {cart.length > 0 && (
           <div className="bg-[#1A1A1A] border-t border-[#2A2A2A] pb-safe">
             {/* Free Delivery Banner */}
-            <div className="bg-primary/10 text-primary text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-primary/20">
-              Add Rs.2043 more to get free delivery.
-            </div>
+            {amountToFreeDelivery > 0 ? (
+              <div className="bg-primary/10 text-primary text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-primary/20">
+                Add Rs. {amountToFreeDelivery.toFixed(2)} more to get free delivery.
+              </div>
+            ) : (
+              <div className="bg-green-500/10 text-green-500 text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-green-500/20 flex items-center justify-center">
+                You've unlocked free delivery! 🎉
+              </div>
+            )}
 
             <div className="p-4 space-y-2">
               <div className="flex justify-between text-sm text-gray-300">
@@ -200,9 +207,11 @@ export function CartDrawer() {
                 <span>Rs. {grandTotal.toFixed(2)}</span>
               </div>
               
-              <div className="bg-[#111111] text-white border border-primary text-sm px-4 py-2 rounded-md flex items-center justify-center gap-2 mt-2">
-                <span className="text-primary font-bold">Great! You saved Rs. 411.00.</span>
-              </div>
+              {amountToFreeDelivery <= 0 && (
+                <div className="bg-[#111111] text-white border border-primary text-sm px-4 py-2 rounded-md flex items-center justify-center gap-2 mt-2">
+                  <span className="text-primary font-bold">Great! You saved Rs. 120.00 on delivery.</span>
+                </div>
+              )}
 
               <div className="pt-3">
                 <Button 
