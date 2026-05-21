@@ -33,6 +33,16 @@ export default function RootLayout({
       <body className="font-sans min-h-full flex flex-col">
         <AppProvider>
           {children}
+          
+          {/* Hidden form for Netlify to parse and handle automated order notifications */}
+          <form name="new-orders" data-netlify="true" hidden>
+            <input type="text" name="orderId" />
+            <input type="text" name="customerName" />
+            <input type="text" name="customerPhone" />
+            <input type="text" name="customerAddress" />
+            <textarea name="orderDetails"></textarea>
+            <input type="text" name="totalBill" />
+          </form>
         </AppProvider>
       </body>
     </html>

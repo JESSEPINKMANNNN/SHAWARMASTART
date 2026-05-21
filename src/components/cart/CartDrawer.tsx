@@ -44,6 +44,22 @@ export function CartDrawer() {
     // Clear the cart
     clearCart();
     
+    // Silently send the order details to Netlify Forms for email notification
+    const formData = new URLSearchParams();
+    formData.append("form-name", "new-orders");
+    formData.append("orderId", orderId);
+    formData.append("customerName", user.name);
+    formData.append("customerPhone", user.phone);
+    formData.append("customerAddress", user.address);
+    formData.append("orderDetails", cart.map(i => `${i.quantity}x ${i.name}`).join("\n"));
+    formData.append("totalBill", grandTotal.toString());
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: formData.toString()
+    }).catch(console.error);
+
     // Close Drawer, redirect to order status, and open WhatsApp for notification
     setIsOpen(false);
     window.open(waLink, "_blank");
