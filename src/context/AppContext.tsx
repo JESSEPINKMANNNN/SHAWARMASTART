@@ -14,6 +14,7 @@ export type CartItem = {
   price: number;
   quantity: number;
   image?: string;
+  description?: string;
 };
 
 export type Order = {
