@@ -145,41 +145,36 @@ export function CartDrawer() {
           ) : (
             <div className="p-4 space-y-4">
               {cart.map((item) => (
-                <div key={item.id} className="flex gap-4 p-4 bg-[#1e1e1e] rounded-xl shadow-lg border border-[#333333] hover:border-primary/50 transition-colors">
+                <div key={item.id} className="flex gap-3 p-3 bg-[#1a1a1a] rounded-xl border border-[#2a2a2a]">
                   {item.image && (
-                    <div className="relative h-24 w-24 rounded-lg overflow-hidden shrink-0 border border-[#333333] shadow-inner">
+                    <div className="relative h-20 w-20 rounded-lg overflow-hidden shrink-0">
                       <Image src={item.image} alt={item.name} fill className="object-cover" />
                     </div>
                   )}
-                  <div className="flex-1 flex flex-col">
+                  <div className="flex-1 flex flex-col gap-1.5">
                     <div className="flex justify-between items-start gap-2">
-                      <h3 className="font-extrabold text-white text-lg leading-tight line-clamp-2">{item.name}</h3>
-                      <p className="text-primary font-black text-lg whitespace-nowrap">Rs. {item.price.toFixed(2)}</p>
-                    </div>
-                    <p className="text-gray-400 text-xs mt-1 mb-auto line-clamp-2">{item.description || "Fresh and delicious."}</p>
-                    
-                    <div className="flex items-center justify-between mt-4">
-                      <div className="flex items-center gap-3 bg-[#111111] p-1 rounded-lg border border-[#333333]">
-                        <button 
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="text-white hover:text-primary h-7 w-7 rounded flex items-center justify-center transition-colors"
-                        >
-                          <Minus className="h-4 w-4" />
-                        </button>
-                        <span className="font-bold text-sm min-w-[20px] text-center text-white">{item.quantity}</span>
-                        <button 
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="text-white hover:text-primary h-7 w-7 rounded flex items-center justify-center transition-colors"
-                        >
-                          <Plus className="h-4 w-4" />
-                        </button>
-                      </div>
-                      <button 
+                      <h3 className="font-bold text-white text-sm leading-tight line-clamp-2">{item.name}</h3>
+                      <button
                         onClick={() => removeFromCart(item.id)}
-                        className="text-red-500 bg-red-500/10 hover:bg-red-500 hover:text-white transition-all flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-bold"
+                        className="text-gray-500 hover:text-red-500 transition-colors shrink-0 mt-0.5"
                       >
                         <Trash2 className="h-4 w-4" />
-                        <span className="text-xs uppercase tracking-wider">Remove</span>
+                      </button>
+                    </div>
+                    <p className="text-primary font-bold text-sm">Rs. {item.price.toFixed(2)}</p>
+                    <div className="flex items-center gap-2 mt-1">
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="bg-primary text-white h-7 w-7 rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors"
+                      >
+                        <Minus className="h-3 w-3" />
+                      </button>
+                      <span className="font-bold text-sm min-w-[32px] text-center text-white border border-[#444] rounded px-2 py-0.5">{item.quantity}</span>
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="bg-primary text-white h-7 w-7 rounded-full flex items-center justify-center hover:bg-primary/80 transition-colors"
+                      >
+                        <Plus className="h-3 w-3" />
                       </button>
                     </div>
                   </div>
