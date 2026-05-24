@@ -106,7 +106,7 @@ export function CartDrawer() {
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-[#2A2A2A] bg-[#1A1A1A] shadow-sm z-10">
           <h2 className="text-xl font-bold flex items-center gap-2 text-white">
-            Your Cart
+            {cart.length === 0 ? "Your Cart is Empty" : "Your Cart"}
           </h2>
           <div className="flex items-center gap-4">
             {cart.length > 0 && (
