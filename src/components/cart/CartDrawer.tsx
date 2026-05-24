@@ -143,6 +143,7 @@ export function CartDrawer() {
               </Button>
             </div>
           ) : (
+            <>
             <div className="p-4 space-y-4">
               {cart.map((item) => (
                 <div key={item.id} className="flex gap-3 p-3 bg-[#1a1a1a] rounded-xl border border-[#2a2a2a]">
@@ -217,6 +218,7 @@ export function CartDrawer() {
                 )}
               </div>
             </div>
+            </>
           )}
         </div>
 
