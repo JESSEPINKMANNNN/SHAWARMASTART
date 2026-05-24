@@ -127,7 +127,7 @@ export function CartDrawer() {
         </div>
 
         {/* Cart Items Area */}
-        <div className="flex-1 overflow-y-auto bg-[#111111]">
+        <div className="flex-1 overflow-y-auto bg-[#111111] min-h-0">
           {cart.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4 p-6">
               <ShoppingCart className="h-16 w-16 opacity-20" />
@@ -191,7 +191,7 @@ export function CartDrawer() {
 
         {/* Footer / Checkout */}
         {cart.length > 0 && (
-          <div className="bg-[#1A1A1A] border-t border-[#2A2A2A] pb-safe">
+          <div className="bg-[#1A1A1A] border-t border-[#2A2A2A] pb-safe shrink-0">
             {/* Free Delivery Banner */}
             {amountToFreeDelivery > 0 ? (
               <div className="bg-primary/10 text-primary text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-primary/20">
