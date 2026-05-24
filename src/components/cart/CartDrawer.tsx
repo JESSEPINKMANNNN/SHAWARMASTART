@@ -186,57 +186,55 @@ export function CartDrawer() {
                 </div>
               ))}
             </div>
+
+            {/* Billing - scrolls with items */}
+            <div className="bg-[#1A1A1A] border-t border-[#2A2A2A]">
+              {amountToFreeDelivery > 0 ? (
+                <div className="bg-primary/10 text-primary text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-primary/20">
+                  Add Rs. {amountToFreeDelivery.toFixed(2)} more to get free delivery.
+                </div>
+              ) : (
+                <div className="bg-green-500/10 text-green-500 text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-green-500/20 flex items-center justify-center">
+                  You&apos;ve unlocked free delivery! 🎉
+                </div>
+              )}
+              <div className="p-4 space-y-2">
+                <div className="flex justify-between text-sm text-gray-300">
+                  <span>Subtotal</span>
+                  <span>Rs. {cartTotal.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm text-gray-300">
+                  <span>Delivery Charges</span>
+                  <span>Rs. {deliveryCharge.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between text-sm text-gray-300 border-b border-[#2A2A2A] pb-2">
+                  <span>Tax (16%)</span>
+                  <span>Rs. {tax.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between font-bold text-white text-lg pt-1">
+                  <span>Grand total <span className="text-xs font-normal text-gray-400">(Incl. Tax)</span></span>
+                  <span>Rs. {grandTotal.toFixed(2)}</span>
+                </div>
+                {amountToFreeDelivery <= 0 && (
+                  <div className="bg-[#111111] text-white border border-primary text-sm px-4 py-2 rounded-md flex items-center justify-center gap-2 mt-2">
+                    <span className="text-primary font-bold">Great! You saved Rs. 120.00 on delivery.</span>
+                  </div>
+                )}
+              </div>
+            </div>
           )}
         </div>
 
-        {/* Footer / Checkout */}
+        {/* Checkout Button - fixed at bottom */}
         {cart.length > 0 && (
-          <div className="bg-[#1A1A1A] border-t border-[#2A2A2A] pb-safe shrink-0">
-            {/* Free Delivery Banner */}
-            {amountToFreeDelivery > 0 ? (
-              <div className="bg-primary/10 text-primary text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-primary/20">
-                Add Rs. {amountToFreeDelivery.toFixed(2)} more to get free delivery.
-              </div>
-            ) : (
-              <div className="bg-green-500/10 text-green-500 text-sm font-medium px-4 py-2 mx-4 mt-4 rounded-md border border-green-500/20 flex items-center justify-center">
-                You've unlocked free delivery! 🎉
-              </div>
-            )}
-
-            <div className="p-4 space-y-2">
-              <div className="flex justify-between text-sm text-gray-300">
-                <span>Subtotal</span>
-                <span>Rs. {cartTotal.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between text-sm text-gray-300">
-                <span>Delivery Charges</span>
-                <span>Rs. {deliveryCharge.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between text-sm text-gray-300 border-b border-[#2A2A2A] pb-2">
-                <span>Tax (16%)</span>
-                <span>Rs. {tax.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between font-bold text-white text-lg pt-1">
-                <span>Grand total <span className="text-xs font-normal text-gray-400">(Incl. Tax)</span></span>
-                <span>Rs. {grandTotal.toFixed(2)}</span>
-              </div>
-              
-              {amountToFreeDelivery <= 0 && (
-                <div className="bg-[#111111] text-white border border-primary text-sm px-4 py-2 rounded-md flex items-center justify-center gap-2 mt-2">
-                  <span className="text-primary font-bold">Great! You saved Rs. 120.00 on delivery.</span>
-                </div>
-              )}
-
-              <div className="pt-3">
-                <Button 
-                  size="lg" 
-                  className="w-full h-12 text-lg rounded-md font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20"
-                  onClick={handleCheckout}
-                >
-                  Checkout
-                </Button>
-              </div>
-            </div>
+          <div className="bg-[#1A1A1A] border-t border-[#2A2A2A] p-4 pb-safe shrink-0">
+            <Button 
+              size="lg" 
+              className="w-full h-12 text-lg rounded-md font-bold bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20"
+              onClick={handleCheckout}
+            >
+              Checkout
+            </Button>
           </div>
         )}
       </div>
