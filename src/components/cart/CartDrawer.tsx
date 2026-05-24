@@ -127,7 +127,8 @@ export function CartDrawer() {
         </div>
 
         {/* Cart Items Area */}
-        <div className="flex-1 overflow-y-auto bg-[#111111] min-h-0">
+        <div className="flex-1 relative overflow-hidden">
+          <div className="absolute inset-0 overflow-y-auto bg-[#111111]">
           {cart.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4 p-6">
               <ShoppingCart className="h-16 w-16 opacity-20" />
@@ -220,6 +221,7 @@ export function CartDrawer() {
             </div>
             </>
           )}
+          </div>
         </div>
 
         {/* Checkout Button - fixed at bottom */}
