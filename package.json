@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "netlify:dev": "netlify dev",
+    "netlify:deploy": "netlify deploy --build"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -25,6 +27,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "netlify-cli": "^26.0.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

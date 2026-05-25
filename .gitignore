@@ -20,6 +20,9 @@
 # production
 /build
 
+# local assets / installers (images live in public/images)
+FOOD PICTURES/*.exe
+
 # misc
 .DS_Store
 *.pem

@@ -99,7 +99,7 @@ export function CartDrawer() {
 
       {/* Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md bg-[#111111] shadow-2xl transform transition-transform duration-300 ease-in-out flex flex-col border-l border-[#2A2A2A] ${
+        className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md bg-[#111111] shadow-2xl transform transition-transform duration-300 ease-in-out grid grid-rows-[auto_1fr_auto] border-l border-[#2A2A2A] ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -127,8 +127,7 @@ export function CartDrawer() {
         </div>
 
         {/* Cart Items Area */}
-        <div className="flex-1 relative overflow-hidden">
-          <div className="absolute inset-0 overflow-y-auto bg-[#111111]">
+        <div className="overflow-y-auto min-h-0 bg-[#111111]">
           {cart.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-gray-400 space-y-4 p-6">
               <ShoppingCart className="h-16 w-16 opacity-20" />
@@ -221,7 +220,6 @@ export function CartDrawer() {
             </div>
             </>
           )}
-          </div>
         </div>
 
         {/* Checkout Button - fixed at bottom */}

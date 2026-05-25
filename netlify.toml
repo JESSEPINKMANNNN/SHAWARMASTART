@@ -1,6 +1,9 @@
 [build]
   command = "npm run build"
-  publish = ".next"
 
+[build.environment]
+  NODE_VERSION = "20"
+
+# Next.js 16: OpenNext adapter runs automatically on Netlify (no publish dir needed).
 [[plugins]]
   package = "@netlify/plugin-nextjs"
