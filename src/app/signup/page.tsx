@@ -19,8 +19,16 @@ export default function SignupPage() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
+    if (name === "phone") {
+      const digitsOnly = value.replace(/\D/g, "");
+      setFormData((prev) => ({ ...prev, [name]: digitsOnly }));
+      return;
+    }
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const isPhoneValid = /^03\d{9}$/.test(formData.phone);
+  const isFormValid = formData.name.trim() !== "" && isPhoneValid && formData.address.trim() !== "";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,9 +75,16 @@ export default function SignupPage() {
                 required
                 value={formData.phone}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl border border-input bg-background focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-colors"
-                placeholder="03xx-xxxxxxx"
+                className={`w-full px-4 py-3 rounded-xl border bg-background focus:outline-none focus:ring-2 transition-colors ${
+                  formData.phone && !isPhoneValid
+                    ? "border-red-500 focus:ring-red-500/50 focus:border-red-500"
+                    : "border-input focus:ring-primary/50 focus:border-primary"
+                }`}
+                placeholder="03xxxxxxxxx"
               />
+              {formData.phone && !isPhoneValid && (
+                <p className="text-red-500 text-xs mt-1">Please enter a valid phone number</p>
+              )}
             </div>
 
             <div>
@@ -88,9 +103,11 @@ export default function SignupPage() {
               />
             </div>
 
-            <Button type="submit" className="w-full h-12 text-lg font-bold rounded-xl shadow-lg shadow-primary/20">
-              Continue to Menu
-            </Button>
+            {isFormValid && (
+              <Button type="submit" className="w-full h-12 text-lg font-bold rounded-xl shadow-lg shadow-primary/20">
+                Continue to Menu
+              </Button>
+            )}
           </form>
         </div>
       </main>
