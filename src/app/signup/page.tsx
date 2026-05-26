@@ -27,7 +27,7 @@ export default function SignupPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const isPhoneValid = /^\d{10,11}$/.test(formData.phone);
+  const isPhoneValid = /^03\d{9}$/.test(formData.phone);
   const isFormValid = formData.name.trim() !== "" && isPhoneValid && formData.address.trim() !== "";
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -83,7 +83,7 @@ export default function SignupPage() {
                 placeholder="03xxxxxxxxx"
               />
               {formData.phone && !isPhoneValid && (
-                <p className="text-red-500 text-xs mt-1">Enter a valid 10-11 digit phone number (digits only)</p>
+                <p className="text-red-500 text-xs mt-1">Please enter a valid phone number</p>
               )}
             </div>
 
