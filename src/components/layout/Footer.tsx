@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export function Footer() {
     return (
-        <footer className="border-t border-border bg-foreground text-background">
+        <footer className="border-t border-border bg-muted text-foreground">
             <div className="container mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
                     <div className="flex flex-col items-center md:items-start gap-4">
                         <span className="font-heading text-3xl font-bold text-primary">
                             ShawarmaStart
                         </span>
-                        <p className="text-sm text-background/80 text-center md:text-left max-w-xs">
+                        <p className="text-sm text-muted-foreground text-center md:text-left max-w-xs">
                             Authentic, crave-worthy shawarma delivered straight to your door. Where hunger ends.
                         </p>
                     </div>
@@ -22,7 +22,7 @@ export function Footer() {
                     </div>
                 </div>
 
-                <div className="mt-12 border-t border-background/20 pt-8 text-center text-sm text-background/60">
+                <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
                     &copy; {new Date().getFullYear()} ShawarmaStart. All rights reserved. Designed to Wow.
                 </div>
             </div>
