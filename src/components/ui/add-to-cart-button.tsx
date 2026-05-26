@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useAppContext } from "@/context/AppContext";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
@@ -15,12 +16,21 @@ type AddToCartButtonProps = {
 };
 
 export function AddToCartButton({ item }: AddToCartButtonProps) {
-  const { addToCart } = useAppContext();
+  const { user, addToCart } = useAppContext();
+  const router = useRouter();
+
+  const handleClick = () => {
+    if (!user) {
+      router.push("/signup");
+      return;
+    }
+    addToCart({ id: item.id, name: item.name, price: item.price, quantity: 1, image: item.image, description: item.description });
+  };
 
   return (
     <Button 
       className="w-full font-bold h-12 rounded-xl shadow-sm bg-primary hover:bg-primary/90 text-white transition-all active:scale-95"
-      onClick={() => addToCart({ id: item.id, name: item.name, price: item.price, quantity: 1, image: item.image, description: item.description })}
+      onClick={handleClick}
     >
       <ShoppingBag className="w-4 h-4 mr-2" />
       Add to Cart
