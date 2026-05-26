@@ -1,10 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { ShoppingCart, X, Plus, Minus, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/context/AppContext";
-import { generateWhatsAppLink } from "@/lib/whatsapp";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -24,6 +23,8 @@ const MENU_ITEMS = [
 
 export function CartDrawer() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [countdown, setCountdown] = useState(10);
   const popularScrollRef = useRef<HTMLDivElement>(null);
   const { cart, cartTotal, updateQuantity, removeFromCart, user, setOrder, clearCart, addToCart } =
     useAppContext();
@@ -47,15 +48,8 @@ export function CartDrawer() {
     });
   };
 
-  const handleCheckout = () => {
-    if (!user) {
-      router.push("/signup");
-      setIsOpen(false);
-      return;
-    }
-
+  const confirmOrder = useCallback(() => {
     const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000);
-    const waLink = generateWhatsAppLink(user, cart, grandTotal, orderId);
 
     setOrder({
       id: orderId,
@@ -71,9 +65,9 @@ export function CartDrawer() {
     const formData = new URLSearchParams();
     formData.append("form-name", "new-orders");
     formData.append("orderId", orderId);
-    formData.append("customerName", user.name);
-    formData.append("customerPhone", user.phone);
-    formData.append("customerAddress", user.address);
+    formData.append("customerName", user!.name);
+    formData.append("customerPhone", user!.phone);
+    formData.append("customerAddress", user!.address);
     formData.append("orderDetails", cart.map((i) => `${i.quantity}x ${i.name}`).join("\n"));
     formData.append("totalBill", grandTotal.toString());
 
@@ -83,10 +77,30 @@ export function CartDrawer() {
       body: formData.toString(),
     }).catch(console.error);
 
+    setShowConfirm(false);
     setIsOpen(false);
-    window.open(waLink, "_blank");
     router.push("/order-status");
+  }, [cart, grandTotal, user, setOrder, clearCart, router]);
+
+  const handleCheckout = () => {
+    if (!user) {
+      router.push("/signup");
+      setIsOpen(false);
+      return;
+    }
+    setCountdown(10);
+    setShowConfirm(true);
   };
+
+  useEffect(() => {
+    if (!showConfirm) return;
+    if (countdown <= 0) {
+      confirmOrder();
+      return;
+    }
+    const timer = setTimeout(() => setCountdown((c) => c - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [showConfirm, countdown, confirmOrder]);
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -315,6 +329,38 @@ export function CartDrawer() {
           </div>
         )}
       </div>
+
+      {/* Confirm Order Popup */}
+      {showConfirm && (
+        <>
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[70]"
+            onClick={() => setShowConfirm(false)}
+          />
+          <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
+            <div className="bg-[#111111] border border-[#2A2A2A] rounded-3xl p-8 max-w-sm w-full shadow-2xl text-center">
+              <h2 className="text-2xl font-heading font-extrabold text-white mb-8">Confirm Order?</h2>
+              <div className="flex flex-col gap-3">
+                <Button
+                  size="lg"
+                  className="w-full h-12 text-lg rounded-xl font-bold bg-primary hover:bg-primary/90 text-white"
+                  onClick={confirmOrder}
+                >
+                  Yeah, looks good
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="w-full h-12 text-lg rounded-xl font-bold border-[#2A2A2A] text-white hover:bg-[#1a1a1a]"
+                  onClick={() => setShowConfirm(false)}
+                >
+                  Modify ({countdown})
+                </Button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }
