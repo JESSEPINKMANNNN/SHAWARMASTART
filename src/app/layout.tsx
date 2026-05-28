@@ -39,6 +39,7 @@ export default function RootLayout({
             <input type="text" name="orderId" />
             <input type="text" name="customerName" />
             <input type="text" name="customerPhone" />
+            <input type="email" name="customerEmail" />
             <input type="text" name="customerAddress" />
             <textarea name="orderDetails"></textarea>
             <input type="text" name="totalBill" />

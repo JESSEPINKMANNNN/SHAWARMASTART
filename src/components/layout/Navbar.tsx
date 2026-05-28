@@ -38,7 +38,7 @@ export function Navbar() {
                     <CartDrawer />
 
                     <Button className="hidden sm:inline-flex p-0">
-                        <Link href="/signup" className="w-full h-full flex items-center justify-center px-4">
+                        <Link href="/menu" className="w-full h-full flex items-center justify-center px-4">
                             Order Now
                         </Link>
                     </Button>

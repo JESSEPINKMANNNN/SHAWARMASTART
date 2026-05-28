@@ -38,7 +38,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
               <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 rounded-full shadow-[0_0_40px_-10px_rgba(192,57,43,0.8)] p-0">
-                <Link href="/signup" className="w-full h-full flex items-center justify-center px-8">
+                <Link href="/menu" className="w-full h-full flex items-center justify-center px-8">
                   Order Delivery <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>

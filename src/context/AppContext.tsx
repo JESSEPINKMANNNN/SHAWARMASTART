@@ -5,6 +5,7 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 export type UserDetails = {
   name: string;
   phone: string;
+  email: string;
   address: string;
 };
 

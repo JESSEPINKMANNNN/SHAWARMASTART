@@ -9,6 +9,7 @@ export function generateWhatsAppLink(user: UserDetails, cart: CartItem[], total:
   message += `*Customer Details:*\n`;
   message += `Name: ${user.name}\n`;
   message += `Phone: ${user.phone}\n`;
+  message += `Email: ${user.email}\n`;
   message += `Address: ${user.address}\n\n`;
   
   message += `*Order Items:*\n`;

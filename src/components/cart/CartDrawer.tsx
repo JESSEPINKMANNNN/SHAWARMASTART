@@ -4,7 +4,6 @@ import { useRef, useState } from "react";
 import { ShoppingCart, X, Plus, Minus, Trash2, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAppContext } from "@/context/AppContext";
-import { generateWhatsAppLink } from "@/lib/whatsapp";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -48,44 +47,8 @@ export function CartDrawer() {
   };
 
   const handleCheckout = () => {
-    if (!user) {
-      router.push("/signup");
-      setIsOpen(false);
-      return;
-    }
-
-    const orderId = "ORD" + Math.floor(100000 + Math.random() * 900000);
-    const waLink = generateWhatsAppLink(user, cart, grandTotal, orderId);
-
-    setOrder({
-      id: orderId,
-      items: [...cart],
-      total: grandTotal,
-      status: "Preparing",
-      date: new Date().toISOString(),
-      estimatedTime: "40 minutes",
-    });
-
-    clearCart();
-
-    const formData = new URLSearchParams();
-    formData.append("form-name", "new-orders");
-    formData.append("orderId", orderId);
-    formData.append("customerName", user.name);
-    formData.append("customerPhone", user.phone);
-    formData.append("customerAddress", user.address);
-    formData.append("orderDetails", cart.map((i) => `${i.quantity}x ${i.name}`).join("\n"));
-    formData.append("totalBill", grandTotal.toString());
-
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: formData.toString(),
-    }).catch(console.error);
-
+    router.push("/signup");
     setIsOpen(false);
-    window.open(waLink, "_blank");
-    router.push("/order-status");
   };
 
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);

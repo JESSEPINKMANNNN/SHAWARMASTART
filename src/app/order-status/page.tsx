@@ -99,6 +99,12 @@ export default function OrderStatusPage() {
                   <span>Total Paid</span>
                   <span>Rs. {currentOrder.total}</span>
                 </div>
+                <div className="flex justify-between items-center text-sm mt-4 pt-3 border-t border-border/50 text-muted-foreground">
+                  <span>Payment Method</span>
+                  <span className="font-semibold text-foreground bg-muted/50 px-3 py-1 rounded-lg border border-border/50">
+                    Cash on Delivery
+                  </span>
+                </div>
               </div>
 
               {/* Delivery Details */}
@@ -109,6 +115,7 @@ export default function OrderStatusPage() {
                   <div>
                     <p className="font-medium">{user?.name}</p>
                     <p className="text-muted-foreground">{user?.phone}</p>
+                    <p className="text-muted-foreground">{user?.email}</p>
                     <p className="text-muted-foreground mt-1">{user?.address}</p>
                   </div>
                 </div>
