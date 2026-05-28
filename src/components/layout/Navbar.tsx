@@ -66,7 +66,10 @@ export function Navbar({ showCart = true }: NavbarProps) {
                         onClick={() => setIsMobileMenuOpen(false)}
                     />
                     {/* Drawer content */}
-                    <div className="relative flex w-4/5 max-w-xs flex-col bg-[#0a0a0a] border-r border-[#1a1a1a] p-6 shadow-2xl transition-transform duration-300 ease-in-out transform translate-x-0 h-full">
+                    <div 
+                        className="relative flex w-4/5 max-w-xs flex-col border-r border-[#1a1a1a] p-6 shadow-2xl transition-transform duration-300 ease-in-out transform translate-x-0 h-full z-50"
+                        style={{ backgroundColor: "#0a0a0a" }}
+                    >
                         <div className="flex items-center justify-between mb-8">
                             <span className="font-heading text-xl font-bold text-primary tracking-tight">
                                 ShawarmaStart
