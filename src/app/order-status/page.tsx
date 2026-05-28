@@ -21,7 +21,7 @@ export default function OrderStatusPage() {
   if (!currentOrder) {
     return (
       <div className="flex flex-col min-h-screen bg-background">
-        <Navbar />
+        <Navbar showCart={false} />
         <main className="flex-1 flex flex-col items-center justify-center py-20 px-4">
           <Package className="h-16 w-16 text-muted-foreground mb-4" />
           <h1 className="text-2xl font-bold mb-2">No Active Order Found</h1>
@@ -44,7 +44,7 @@ export default function OrderStatusPage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      <Navbar />
+      <Navbar showCart={false} />
 
       <main className="flex-1 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto space-y-8">
