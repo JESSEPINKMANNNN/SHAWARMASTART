@@ -59,15 +59,15 @@ export function Navbar({ showCart = true }: NavbarProps) {
 
             {/* Mobile Drawer Overlay */}
             {isMobileMenuOpen && (
-                <div className="fixed inset-0 z-50 flex lg:hidden">
+                <div className="fixed inset-0 z-50 lg:hidden">
                     {/* Backdrop */}
                     <div 
-                        className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+                        className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 z-40"
                         onClick={() => setIsMobileMenuOpen(false)}
                     />
                     {/* Drawer content */}
                     <div 
-                        className="relative flex w-4/5 max-w-xs flex-col border-r border-[#1a1a1a] p-6 shadow-2xl transition-transform duration-300 ease-in-out transform translate-x-0 h-full z-50"
+                        className="fixed top-0 left-0 bottom-0 w-4/5 max-w-xs flex flex-col border-r border-[#1a1a1a] p-6 shadow-2xl transition-transform duration-300 ease-in-out transform translate-x-0 z-50"
                         style={{ backgroundColor: "#0a0a0a" }}
                     >
                         <div className="flex items-center justify-between mb-8">
