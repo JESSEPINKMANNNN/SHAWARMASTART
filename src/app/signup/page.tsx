@@ -78,7 +78,7 @@ export default function SignupPage() {
       netlifyData.append("orderDetails", cart.map((i) => `${i.quantity}x ${i.name}`).join("\n"));
       netlifyData.append("totalBill", grandTotal.toString());
 
-      fetch("/", {
+      fetch("/forms.html", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: netlifyData.toString(),
