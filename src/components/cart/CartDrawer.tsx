@@ -76,7 +76,7 @@ export function CartDrawer() {
 
       <div
         className={`fixed inset-y-0 right-0 z-[60] w-full max-w-md h-dvh flex flex-col bg-[#0a0a0a] shadow-2xl transform transition-transform duration-300 ease-in-out border-l border-[#2A2A2A] ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isOpen ? "translate-x-0 visible pointer-events-auto" : "translate-x-full invisible pointer-events-none"
         }`}
       >
         {/* Header — always top */}
