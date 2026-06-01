@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowRight, Star } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -37,24 +37,20 @@ export default function Home() {
               Authentic, bold, and unapologetically delicious. Order the best shawarma in town, delivered piping hot to your door.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Button size="lg" className="w-full sm:w-auto text-lg h-14 px-8 rounded-full shadow-[0_0_40px_-10px_rgba(192,57,43,0.8)] p-0">
-                <Link href="/menu" className="w-full h-full flex items-center justify-center px-8">
-                  Order Delivery <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg h-14 rounded-full bg-white/5 text-white border-white/20 hover:bg-white/10 hover:border-white/30 p-0">
-                <Link href="/menu" className="w-full h-full flex items-center justify-center px-8">
-                  View Menu
-                </Link>
-              </Button>
+              <Link href="/menu" className={buttonVariants({ size: "lg", className: "w-full sm:w-auto text-lg h-14 px-8 rounded-full shadow-[0_0_40px_-10px_rgba(192,57,43,0.8)]" })}>
+                Order Delivery <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+              <Link href="/menu" className={buttonVariants({ size: "lg", variant: "outline", className: "w-full sm:w-auto text-lg h-14 rounded-full bg-white/5 text-white border-white/20 hover:bg-white/10 hover:border-white/30" })}>
+                View Menu
+              </Link>
             </div>
           </div>
         </section>
 
         {/* Categories Section */}
-        <section className="relative py-12 bg-background -mt-8 z-30">
+        <section className="relative py-12 bg-background -mt-8 z-30 pointer-events-none">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4 bg-background p-4 rounded-3xl shadow-xl shadow-black/5 border border-border mx-auto max-w-5xl">
+            <div className="flex flex-wrap justify-center gap-3 md:gap-4 bg-background p-4 rounded-3xl shadow-xl shadow-black/5 border border-border mx-auto max-w-5xl pointer-events-auto">
               {["Signature Wraps", "Sides & Bites", "Refreshing Drinks"].map((cat) => (
                 <button key={cat} className="px-5 py-2.5 rounded-full bg-muted text-foreground font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300 active:scale-95 text-sm md:text-base border border-transparent hover:border-primary/20">
                   {cat}
@@ -72,11 +68,9 @@ export default function Home() {
                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-3 tracking-tight">Legendary Bites</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl">The undisputed champions of our menu. If you're new here, start with one of these crowd favorites.</p>
               </div>
-              <Button variant="ghost" className="text-primary font-bold hover:bg-primary/10 -ml-4 md:ml-0 p-0" asChild>
-                <Link href="/menu" className="w-full h-full flex items-center px-4 py-2">
-                  View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <a href="/menu" className={buttonVariants({ variant: "ghost", className: "text-primary font-bold hover:bg-primary/10 -ml-4 md:ml-0 px-4 py-2 cursor-pointer" })}>
+                View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
