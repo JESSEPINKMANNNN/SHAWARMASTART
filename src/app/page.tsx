@@ -72,8 +72,10 @@ export default function Home() {
                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-3 tracking-tight">Legendary Bites</h2>
                 <p className="text-muted-foreground text-lg max-w-2xl">The undisputed champions of our menu. If you're new here, start with one of these crowd favorites.</p>
               </div>
-              <Button variant="ghost" className="text-primary font-bold hover:bg-primary/10 -ml-4 md:ml-0">
-                View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
+              <Button variant="ghost" className="text-primary font-bold hover:bg-primary/10 -ml-4 md:ml-0 p-0" asChild>
+                <Link href="/menu" className="w-full h-full flex items-center px-4 py-2">
+                  View Full Menu <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
             </div>
 
