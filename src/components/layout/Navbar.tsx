@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 
 interface NavbarProps {
@@ -49,11 +49,9 @@ export function Navbar({ showCart = true }: NavbarProps) {
                 <div className="flex items-center gap-4">
                     {showCart && <CartDrawer />}
 
-                    <Button className="hidden sm:inline-flex p-0">
-                        <Link href="/menu" className="w-full h-full flex items-center justify-center px-4">
-                            Order Now
-                        </Link>
-                    </Button>
+                    <Link href="/menu" className={buttonVariants({ className: "hidden sm:inline-flex px-4" })}>
+                        Order Now
+                    </Link>
                 </div>
             </div>
 
@@ -108,11 +106,9 @@ export function Navbar({ showCart = true }: NavbarProps) {
                         </nav>
                         
                         <div className="mt-auto">
-                            <Button className="w-full p-0" onClick={() => setIsMobileMenuOpen(false)}>
-                                <Link href="/menu" className="w-full h-full flex items-center justify-center py-2 font-bold">
-                                    Order Now
-                                </Link>
-                            </Button>
+                            <Link href="/menu" className={buttonVariants({ className: "w-full py-2 font-bold" })} onClick={() => setIsMobileMenuOpen(false)}>
+                                Order Now
+                            </Link>
                         </div>
                     </div>
                 </div>
